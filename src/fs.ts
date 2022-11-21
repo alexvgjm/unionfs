@@ -30,6 +30,7 @@ type FSMethods =
   | 'writeSync'
   | 'readSync'
   | 'readFileSync'
+  | 'rmSync'
   | 'writeFileSync'
   | 'appendFileSync'
   | 'existsSync'
