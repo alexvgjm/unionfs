@@ -16,6 +16,7 @@ const SPECIAL_METHODS = new Set([
   'createReadStream',
   'createWriteStream',
   'watch',
+  'rmSync', // not special just a hotfix (not found in fs-monkey/fsSyncMethods)
   'watchFile',
   'unwatchFile',
 ]);
@@ -244,6 +245,10 @@ export class Union {
     }
     return this.sortedArrayFromReaddirResult(result);
   };
+
+  public rmSync = (...args) => {
+    this.syncMethod('rmSync', args)
+  }
 
   public readdirPromise = async (...args): Promise<Array<readdirEntry>> => {
     let lastError: IUnionFsError | null = null;
