@@ -19,6 +19,7 @@ const SPECIAL_METHODS = new Set([
   'createReadStream',
   'createWriteStream',
   'watch',
+  'rmSync', // not special just a hotfix (not found in fs-monkey/fsSyncMethods)
   'watchFile',
   'unwatchFile',
 ]);
@@ -282,6 +283,10 @@ export class Union {
 
     // CASE 4: different FS. Workaround: read src, write dest.
     destFS.writeFileSync(dest, srcFS.readFileSync(src));
+  }
+
+  public rmSync = (...args) => {
+    this.syncMethod('rmSync', args)
   }
 
   public readdirPromise = async (...args): Promise<Array<readdirEntry>> => {
